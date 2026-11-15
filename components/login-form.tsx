@@ -6,7 +6,7 @@ import { ClientResponseError } from "pocketbase";
 import { AlertCircle, Loader2 } from "lucide-react";
 
 import { pb, type UserRecord } from "@/lib/pocketbase";
-import { ROLE_HOME, canAccess, isRole, type Role } from "@/lib/roles";
+import { getRedirectTarget, isRole } from "@/lib/roles";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,15 +20,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-// Wraca na stronę, z której wyrzucił nas middleware (?next=...), ale tylko
-// jeśli jest wewnętrzna i dozwolona dla roli. W przeciwnym razie strona główna roli.
-function getRedirect(next: string | null, role: Role): string {
-  const safe = next && next.startsWith("/") && !next.startsWith("//");
-  if (safe && canAccess(role, next.split("?")[0])) return next;
-  return ROLE_HOME[role];
-}
+type Props = {
+  onSwitchToRegister: () => void;
+};
 
-export function LoginForm() {
+export function LoginForm({ onSwitchToRegister }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -54,7 +50,7 @@ export function LoginForm() {
         return;
       }
 
-      router.replace(getRedirect(searchParams.get("next"), record.role));
+      router.replace(getRedirectTarget(searchParams.get("next"), record.role));
       router.refresh();
     } catch (err) {
       if (err instanceof ClientResponseError) {
@@ -119,11 +115,22 @@ export function LoginForm() {
           </div>
         </CardContent>
 
-        <CardFooter className="mt-6">
+        <CardFooter className="mt-6 flex-col gap-3">
           <Button type="submit" className="w-full" disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Logowanie..." : "Zaloguj się"}
           </Button>
+          <p className="text-sm text-muted-foreground">
+            Nie masz konta?{" "}
+            <Button
+              type="button"
+              variant="link"
+              className="h-auto p-0"
+              onClick={onSwitchToRegister}
+            >
+              Załóż konto
+            </Button>
+          </p>
         </CardFooter>
       </form>
     </Card>
