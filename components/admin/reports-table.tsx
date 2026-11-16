@@ -30,7 +30,7 @@ const ALL = "all";
 type Filters = { status: string; room: string; priority: string };
 const DEFAULT_FILTERS: Filters = { status: ALL, room: ALL, priority: ALL };
 
-// Filtrowanie odbywa się po stronie PocketBase. pb.filter() bezpiecznie podstawia wartości.
+// filtrowanie w pb
 async function fetchReports(filters: Filters) {
   const parts: string[] = [];
   const params: Record<string, string> = {};

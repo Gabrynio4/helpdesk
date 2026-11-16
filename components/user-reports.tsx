@@ -21,8 +21,6 @@ export function UserReports() {
         return;
       }
       try {
-        // Filtr to wygoda; faktyczne ograniczenie do własnych zgłoszeń
-        // wymusza reguła List/View w PocketBase.
         const items = await pb.collection("reports").getFullList<ReportRecord>({
           filter: pb.filter("author = {:id}", { id: userId }),
           sort: "-created",
@@ -44,4 +42,3 @@ export function UserReports() {
     </div>
   );
 }
-

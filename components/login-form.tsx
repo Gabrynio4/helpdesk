@@ -42,11 +42,12 @@ export function LoginForm({ onSwitchToRegister }: Props) {
       const { record } = await pb
         .collection("users")
         .authWithPassword<UserRecord>(email, password);
-
-      // Ciasteczko jest zapisywane automatycznie (patrz lib/pocketbase.ts).
+      // gdyby user nie mial roli
       if (!isRole(record.role)) {
         pb.authStore.clear();
-        setError("Twoje konto nie ma przypisanej roli. Skontaktuj się z administratorem.");
+        setError(
+          "Twoje konto nie ma przypisanej roli. Skontaktuj się z administratorem.",
+        );
         return;
       }
 

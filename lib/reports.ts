@@ -1,7 +1,6 @@
 import type { RecordModel } from "pocketbase";
 import type { UserRecord } from "@/lib/pocketbase";
 
-
 export const ROOMS = ["216", "220", "214"] as const;
 export const CATEGORIES = [
   "sprzęt komputerowy",

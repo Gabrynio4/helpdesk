@@ -39,7 +39,6 @@ export function ReportDialog({ report, onClose, onSaved }: Props) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // pole image może być pojedynczym plikiem lub listą (zależnie od ustawień pola)
   const imageName = Array.isArray(report.image) ? report.image[0] : report.image;
   const imageUrl = imageName ? pb.files.getURL(report, imageName) : null;
 
@@ -86,7 +85,6 @@ export function ReportDialog({ report, onClose, onSaved }: Props) {
 
           {imageUrl && (
             <a href={imageUrl} target="_blank" rel="noreferrer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={pb.files.getURL(report, imageName, { thumb: "600x0" })}
                 alt={`Zdjęcie do zgłoszenia: ${report.title}`}
@@ -116,7 +114,7 @@ export function ReportDialog({ report, onClose, onSaved }: Props) {
             <Textarea
               id="report-comment"
               rows={4}
-              placeholder="Np. zamówiono część, technik będzie w czwartek..."
+              placeholder="tutaj wpisz komentarz"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

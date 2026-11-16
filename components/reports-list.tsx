@@ -56,7 +56,6 @@ export function ReportsList({ reports, loading, error }: Props) {
                 rel="noreferrer"
                 className="shrink-0"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={pb.files.getURL(report, report.image, {
                     thumb: "200x200",

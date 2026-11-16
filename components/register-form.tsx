@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const MIN_PASSWORD_LENGTH = 8; // domyślne minimum w PocketBase
+const MIN_PASSWORD_LENGTH = 8;
 
 type Props = {
   onSwitchToLogin: () => void;
@@ -72,7 +72,7 @@ export function RegisterForm({ onSwitchToLogin }: Props) {
 
     setLoading(true);
     try {
-      // Rola jest zawsze "user". Reguła Create w PocketBase i tak nie pozwoli na inną.
+      // rola zawsze user
       await pb.collection("users").create({
         name,
         email,
@@ -81,7 +81,7 @@ export function RegisterForm({ onSwitchToLogin }: Props) {
         role: "user",
       });
 
-      // Od razu logujemy nowego użytkownika.
+      // or razu po utworzeniu konta logowanie
       const { record } = await pb
         .collection("users")
         .authWithPassword<UserRecord>(email, password);

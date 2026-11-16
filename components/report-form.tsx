@@ -35,8 +35,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 const roomItems = ROOMS.map((r) => ({ value: r, label: `Sala ${r}` }));
-const categoryItems = CATEGORIES.map((c) => ({ value: c, label: capitalize(c) }));
-const priorityItems = PRIORITIES.map((p) => ({ value: p, label: capitalize(p) }));
+const categoryItems = CATEGORIES.map((c) => ({
+  value: c,
+  label: capitalize(c),
+}));
+const priorityItems = PRIORITIES.map((p) => ({
+  value: p,
+  label: capitalize(p),
+}));
 
 type Props = {
   onCreated: (report: ReportRecord) => void;
@@ -105,7 +111,7 @@ export function ReportForm({ onCreated }: Props) {
       formData.append("room", room);
       formData.append("category", category);
       formData.append("priority", priority);
-      formData.append("status", "nowe"); // nowe zgłoszenie zawsze startuje jako "nowe"
+      formData.append("status", "nowe"); // nowe zgłoszenie zawsze jest nowe
       formData.append("author", authorId);
       if (file) formData.append("image", file);
 
@@ -123,7 +129,9 @@ export function ReportForm({ onCreated }: Props) {
         } else if (err.response?.data?.image) {
           setError("Zdjęcie nie spełnia wymagań (tylko obraz, maks. 5 MB).");
         } else {
-          setError("Nie udało się dodać zgłoszenia. Sprawdź dane i spróbuj ponownie.");
+          setError(
+            "Nie udało się dodać zgłoszenia. Sprawdź dane i spróbuj ponownie.",
+          );
         }
       } else {
         setError("Wystąpił nieoczekiwany błąd.");
