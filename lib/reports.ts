@@ -1,6 +1,7 @@
 import type { RecordModel } from "pocketbase";
+import type { UserRecord } from "@/lib/pocketbase";
 
-// Wartości MUSZĄ być identyczne z tymi w polach select w PocketBase (łącznie z polskimi znakami).
+
 export const ROOMS = ["216", "220", "214"] as const;
 export const CATEGORIES = [
   "sprzęt komputerowy",
@@ -23,11 +24,13 @@ export type ReportRecord = RecordModel & {
   category: Category;
   priority: Priority;
   status: Status;
-  image: string; // nazwa pliku, pusta jeśli brak zdjęcia
-  author: string; // id użytkownika
+  image: string;
+  author: string;
+  admin_comment: string;
+  expand?: { author?: UserRecord };
 };
 
-export const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5 MB
+export const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 export function validateImage(file: File): string | null {
   if (!file.type.startsWith("image/")) {
