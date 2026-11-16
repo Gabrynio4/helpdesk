@@ -3,19 +3,13 @@
 
 Aplikacja do zgłaszania usterek w salach (216, 220, 214). Użytkownik dodaje zgłoszenia ze zdjęciem i śledzi ich status, a technik przegląda wszystkie zgłoszenia, filtruje je, zmienia status i dodaje komentarz.
 
-
 ## Screenshots
 
-![App Screenshot]()
+![Admin Panel](admin.png)
 
-![App Screenshot]()
+![User Panel](user.png)
 
-![App Screenshot]()
-
-
-## Autor
-
-- [@Gabrynio4](https://github.com/Gabrynio4)
+![Login Page](loginpage.png)
 
 ## Uruchomienie lokalnie
  
@@ -58,3 +52,7 @@ Nowe konta można także utworzyć w panelu logowania. Technik to użytkownik z 
 |---|---|---|
 | Użytkownik (`user`) | `testuser@abc.com` | `testuser` 
 | Technik (`admin`) | `testadmin@abc.com` | `testadmin` 
+
+## Autor
+
+- [@Gabrynio4](https://github.com/Gabrynio4)
